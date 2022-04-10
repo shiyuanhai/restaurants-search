@@ -16,6 +16,8 @@ yarn start
 
 ## Gotchas
 
+- Configure 'Searchable attributes' in Index configuration to set a list of attributes to be searchable from SearchBox.
+
 ## Future Improvements
 
 ## References

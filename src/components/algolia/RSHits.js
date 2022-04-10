@@ -1,4 +1,4 @@
-import { AttachMoney, Delete, LocationOn, Phone } from '@mui/icons-material';
+import { AttachMoney, Delete, LocationOn, Payment, Phone } from '@mui/icons-material';
 import { Card, CardContent, CardMedia, Grid, Typography, Rating, Box, CardActions, IconButton, Tooltip, Button } from '@mui/material';
 import { connectHits } from 'react-instantsearch-dom';
 
@@ -20,20 +20,20 @@ const RSHit = ( { hit }) => (
         {hit.dining_style}  &#8226; {hit.food_type}  &#8226;  {hit.neighborhood}
       </Typography>
       <Grid container>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12} lg={6}>
           <Rating name="read-only" value={hit.stars_count} readOnly />
         </Grid>
-        <Grid item xs={12} sm={6} sx={{display: 'flex', alignItems: 'center'}}>
+        <Grid item xs={12} sm={12} lg={6} sx={{display: 'flex', alignItems: 'center'}}>
           <Box>
             {hit.reviews_count} Reviews
           </Box>
         </Grid>
       </Grid>
       <Grid container>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12} lg={6}>
           <Rating name="read-only" value={hit.price} icon={<AttachMoney />} emptyIcon={''} readOnly />
         </Grid>
-        <Grid item xs={12} sm={6} sx={{display: 'flex', alignItems: 'center'}}>
+        <Grid item xs={12} sm={12} lg={6} sx={{display: 'flex', alignItems: 'center'}}>
           <Box>
             {hit.price_range}
           </Box>
@@ -41,7 +41,7 @@ const RSHit = ( { hit }) => (
       </Grid>
       <CardActions>
         <Grid container>
-          <Grid item xs={12} sm={8}>
+          <Grid item md={12} lg={7}>
             <Tooltip title={`${hit.address}, ${hit.city}, ${hit.state}, ${hit.postal_code}, ${hit.country}`}>
               <IconButton>
                 <LocationOn />
@@ -52,8 +52,13 @@ const RSHit = ( { hit }) => (
                 <Phone />
               </IconButton>
             </Tooltip>
+            <Tooltip title={hit.payment_options.join(', ')}>
+              <IconButton>
+                <Payment />
+              </IconButton>
+            </Tooltip>
           </Grid>
-          <Grid item  xs={12} sm={4}>
+          <Grid item md={12} lg={5}>
             <Button variant="outlined" href={hit.reserve_url}>
               Reserve
             </Button>
@@ -70,7 +75,7 @@ const RSHits = ( { hits } ) => {
       {
         hits.map( (hit) => {
           return (
-            <Grid key={hit.objectID} item xs={2} sm={4} md={4} >
+            <Grid key={hit.objectID} item xs={2} sm={4} >
               <RSHit hit={hit} />
             </Grid>
           );
