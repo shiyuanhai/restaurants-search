@@ -1,7 +1,8 @@
 import { InstantSearch } from 'react-instantsearch-dom';
 import './Home.css';
 import { restaurantsIndex, searchClient } from '../utils/algolia';
-import { SearchBox, Hits } from 'react-instantsearch-dom';
+import { SearchBox } from 'react-instantsearch-dom';
+import RSHits from './algolia/RSHits';
 
 const Home = () => {
   return (
@@ -11,7 +12,7 @@ const Home = () => {
         indexName={restaurantsIndex.indexName}
       >
         <SearchBox />
-        <Hits />
+        <RSHits />
       </InstantSearch>
     </main>
   );
