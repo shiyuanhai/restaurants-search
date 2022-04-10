@@ -7,8 +7,13 @@ import { Box } from '@mui/system';
 import RSSearchBox from './algolia/RSSearchBox';
 import RSPagination from './algolia/RSPagination';
 import { Configure } from 'react-instantsearch-dom';
+import RSRefinementList from './algolia/RSRefinementList';
+import { useCallback, useState } from 'react';
 
 const Home = () => {
+  const [showMore, setShowMore] = useState(false);
+  const setShowMoreMemo = useCallback(() => setShowMore(s => s), [setShowMore]);
+
   return (
     <main>
       <InstantSearch
@@ -18,9 +23,16 @@ const Home = () => {
         <Configure hitsPerPage={9}/>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={3}>
-            <h2>Filters</h2>
+            <RSRefinementList 
+              attribute='food_type' 
+              searchable
+              limit={6}
+              showMore={showMore}
+              showMoreLimit={100}
+              setShowMore={setShowMoreMemo}
+            />
           </Grid>
-          <Grid item xs={12} sm={9} spacing={2}>
+          <Grid item xs={12} sm={9}>
             <Box sx={{display: 'flex', marginBottom: '16px'}}>
               <Box sx={{ flexGrow: 1 }}>
                 <RSSearchBox />
