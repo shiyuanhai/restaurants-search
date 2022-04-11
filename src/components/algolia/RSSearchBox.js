@@ -8,7 +8,7 @@ const RSSearchBox = ({ currentRefinement, refine }) => (
         type="search"
         value={currentRefinement}
         onChange={event => refine(event.currentTarget.value)}
-        sx={{width: '100%'}}
+        sx={{width: '96%'}}
       />
   </form>
 );
