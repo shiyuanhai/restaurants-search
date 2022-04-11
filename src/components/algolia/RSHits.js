@@ -119,7 +119,7 @@ const RSHits = ( { hits, setRefresh } ) => {
         onClose={handleClose}
       >
         <DialogTitle>
-          Delete A Concert
+          Delete A Restaurant
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
