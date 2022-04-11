@@ -8,17 +8,26 @@ import RSSearchBox from './algolia/RSSearchBox';
 import RSPagination from './algolia/RSPagination';
 import { Configure } from 'react-instantsearch-dom';
 import RSRefinementList from './algolia/RSRefinementList';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import AddRestaurant from './restaurants/AddRestaurant';
 
 const Home = () => {
   const [showMore, setShowMore] = useState(false);
   const setShowMoreMemo = useCallback(() => setShowMore(s => s), [setShowMore]);
+
+  const [refresh, setRefresh] = useState(false);
+  useEffect(() => {
+    if (refresh) {
+      setRefresh(false);
+    }
+  }, [refresh]);
 
   return (
     <main>
       <InstantSearch
         searchClient={searchClient}
         indexName={restaurantsIndex.indexName}
+        refresh={refresh}
       >
         <Configure hitsPerPage={9}/>
         <Grid container spacing={2}>
@@ -37,9 +46,10 @@ const Home = () => {
               <Box sx={{ flexGrow: 1 }}>
                 <RSSearchBox />
               </Box>
+              <AddRestaurant setRefresh={setRefresh} />
             </Box>
             <Box sx={{marginBottom: '16px'}}>
-              <RSHits />
+              <RSHits setRefresh={setRefresh} />
             </Box>
             <RSPagination />
           </Grid>
